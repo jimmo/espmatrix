@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ESP MicroPython Demo</title>
+    <style>
+      body {
+      }
+      table {
+        border-collapse: collapse;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      td {
+      border: 2px solid silver;
+      width: 24px;
+      height: 24px;
+
+      }
+      img {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <table id="grid">
+    </table>
+    <img id="fetch" src="">
+    <script type="text/javascript">
+
+var grid = document.getElementById('grid');
+for (var y = 0; y < 8; ++y) {
+  var row = grid.insertRow();
+  for (var x = 0; x < 8; ++x) {
+    var cell = row.insertCell();
+    cell.setAttribute('x', x);
+    cell.setAttribute('y', y);
+  }
+}
+document.addEventListener('click', function(event) {
+  var t = event.target;
+  if (t.tagName === 'TD') {
+    var x = t.getAttribute('x');
+    var y = t.getAttribute('y');
+    var url = '/set/' + x + '/' + y;
+    var f = document.getElementById('fetch');
+    if (t.style.backgroundColor === 'red') {
+      t.style.backgroundColor = 'white';
+      f.src = url + '/0';
+    } else {
+      t.style.backgroundColor = 'red';
+      f.src = url + '/1';
+    }
+  }
+});
+    </script>
+  </body>
+</html>
